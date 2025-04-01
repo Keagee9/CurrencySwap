@@ -23,7 +23,7 @@ mobileMenu.addEventListener('click', () => {
 });
 
 // Currency Converter Logic
-const API_KEY = 'YOUR_API_KEY'; // Replace with your actual API key
+const API_KEY = 'ca1ceb5f2b5fc66a73bcc7be';
 const API_URL = 'https://v6.exchangerate-api.com/v6/';
 
 const fromCurrency = document.getElementById('from-currency');
@@ -92,6 +92,7 @@ async function convertCurrency() {
                 <span class="result-amount">${convertedAmount}</span>
                 <span class="result-currency">${toCurrency.value}</span>
             `;
+            result.classList.remove('error');
         } else {
             showError('Conversion failed. Please try again.');
         }
@@ -118,6 +119,7 @@ function swapCurrencies() {
 // Show error message
 function showError(message) {
     result.innerHTML = `<span class="error">${message}</span>`;
+    result.classList.add('error');
 }
 
 // Event listeners
@@ -142,6 +144,17 @@ if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
         // Add your login logic here
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        
+        // Simple validation
+        if (!email || !password) {
+            alert('Please fill in all fields');
+            return;
+        }
+        
+        // You would typically send this to a server
+        console.log('Login attempt:', { email });
         alert('Login functionality will be implemented soon!');
     });
 }
@@ -149,15 +162,30 @@ if (loginForm) {
 if (signupForm) {
     signupForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
+        const terms = document.getElementById('terms').checked;
+
+        // Simple validation
+        if (!name || !email || !password || !confirmPassword) {
+            alert('Please fill in all fields');
+            return;
+        }
 
         if (password !== confirmPassword) {
             alert('Passwords do not match!');
             return;
         }
 
-        // Add your signup logic here
+        if (!terms) {
+            alert('Please accept the Terms of Service');
+            return;
+        }
+
+        // You would typically send this to a server
+        console.log('Sign up attempt:', { name, email });
         alert('Sign up functionality will be implemented soon!');
     });
 }
